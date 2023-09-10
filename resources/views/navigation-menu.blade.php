@@ -93,6 +93,16 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            @if(auth()->user()->type=='admin')
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                Admin settings
+                            </div>
+
+                            <x-dropdown-link href="{{ route('quizzes.index') }}">
+                                Quizzes
+                            </x-dropdown-link>
+                            @endif
+
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
