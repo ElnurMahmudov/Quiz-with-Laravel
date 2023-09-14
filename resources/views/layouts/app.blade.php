@@ -47,7 +47,6 @@
         </div>
 
         @stack('modals')
-
         @livewireScripts
     </body>
     <script src="{{asset('css/bootstrap.js')}}"></script>

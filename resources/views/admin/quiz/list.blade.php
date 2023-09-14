@@ -1,6 +1,8 @@
 <x-app-layout>
     <x-slot name="header">Quizzes</x-slot>
     <link rel="stylesheet" href="{{asset('fontawesome-free-6.4.2-web/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap/min.css')}}">
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">
@@ -33,3 +35,6 @@
         </div>
     </div>
 </x-app-layout>
+
+<script src="{{asset('js/bootstrap.js')}}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
