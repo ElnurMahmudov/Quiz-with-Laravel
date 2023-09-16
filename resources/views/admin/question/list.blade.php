@@ -25,14 +25,20 @@
                 @foreach($quiz->questions as $question)
                     <tr>
                     <td>{{$question->question}}</td>
-                    <td>{{$question->image}}</td>
+                    <td>
+                    @if($question->image)
+                    <a href="{{asset($question->image)}}" target="_blank">
+                        <img src="{{asset($question->image)}}" class="img-responsive" style="width:150px">
+                    </a><br>
+                    @endif
+                    </td>
                     <td>{{$question->A}}</td>
                     <td>{{$question->B}}</td>
                     <td>{{$question->C}}</td>
                     <td>{{$question->D}}</td>
                     <td>{{$question->correct_answer}}</td>
                     <td>
-                    <a href="{{route('quizzes.edit',$question->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
+                    <a href="{{route('questions.edit',[$quiz->id,$question->id])}}" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
                     <a href="{{route('quizzes.destroy',$question->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                     </td>
                     </tr>

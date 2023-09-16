@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Http\Requests\QuestionCreateRequest;
+use App\Http\Requests\QuestionUpdateRequest;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File; 
 
 class QuestionController extends Controller
 {
@@ -57,17 +59,31 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $quiz_id,$question_id)
     {
-        //
+        $question = Quiz::find($quiz_id)->questions()->whereId($question_id)->first() ?? abort(404);
+        return view('admin.question.edit',compact('question'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(QuestionUpdateRequest $request, string $quiz_id,$question_id)
     {
-        //
+        $deleteFile = Quiz::find($quiz_id)->questions()->whereId($question_id)->first()->image;
+        File::delete(public_path($deleteFile)); 
+
+        if($request->hasFile('image')){
+            $fileName = Str::slug($request->question).'.'.$request->image->extension();
+            $fileNameWithUpload = 'uploads/'.$fileName;
+            $request->image->move(public_path('uploads'),$fileName);
+            $request->merge([
+                'image'=>$fileNameWithUpload
+            ]);
+        }
+         Quiz::find($quiz_id)->questions()->whereId($question_id)->first()->update($request->post());
+
+        return redirect()->route('questions.index',$quiz_id)->withSuccess('Question update saccessfully');
     }
 
     /**
