@@ -16,11 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('quiz_id');
             $table->longText('question');
             $table->longText('image')->nullable();
-            $table->longText('answer1');
-            $table->longText('answer2');
-            $table->longText('answer3');
-            $table->longText('answer4');
-            $table->enum('correct_answer',['answer1','answer2','answer3','answer4']);
+            $table->longText('A');
+            $table->longText('B');
+            $table->longText('C');
+            $table->longText('D');
+            $table->enum('correct_answer',['A','B','C','D']);
             $table->timestamps();
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
         });
