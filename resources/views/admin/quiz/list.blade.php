@@ -5,9 +5,29 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap/min.css')}}">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">
+            <h5 class="card-title float-end">
                 <a href="{{route('quizzes.create')}}" class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> New Quiz</a><br><br>
             </h5>
+            <form method="GET" action="">
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="text" name="title" value="{{request()->get('title')}}" placeholder="Quiz title" class="form-control">
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-control" onchange="this.form.submit()" name="status">
+                            <option value="">Select</option>
+                            <option @if(request()->get('status')=='publish') selected @endif value="publish">Active</option>
+                            <option @if(request()->get('status')=='passive') selected @endif value="passive">Passiv</option>
+                            <option @if(request()->get('status')=='draft') selected @endif value="draft">Draft</option>
+                        </select>
+                    </div>
+                    @if(request()->get('title') || request()->get('status'))
+                        <div class="col-md-2">
+                            <a href="{{route('quizzes.index')}}" class="btn btn-outline-primary">Reset</a>
+                        </div>
+                    @endif
+                </div>
+            </form>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -49,7 +69,7 @@
                     @endforeach
                 </tbody>
                 </table>
-                {{$quizzes->links()}}
+                {{$quizzes->withQueryString()->links()}}
         </div>
     </div>
 </x-app-layout>
