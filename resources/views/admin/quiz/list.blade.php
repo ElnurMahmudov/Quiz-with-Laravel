@@ -12,6 +12,7 @@
                 <thead>
                     <tr>
                     <th scope="col">Quiz</th>
+                    <th scope="col">Questions</th>
                     <th scope="col">Status</th>
                     <th scope="col">Finished at</th>
                     <th scope="col">Settings</th>
@@ -21,10 +22,26 @@
                     @foreach($quizzes as $quiz)
                     <tr>
                     <td>{{$quiz->title}}</td>
-                    <td>{{$quiz->status}}</td>
-                    <td>{{$quiz->finished_at}}</td>
                     <td>
-                    <a href="{{route('questions.index',$quiz->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-question"></i></a>
+                        <a href="{{route('questions.index',$quiz->id)}}" class="btn btn-sm btn-outline-secondary">{{$quiz->questions_count}} see the questions</i></a>
+                    </td>
+                    <td>
+                        @switch($quiz->status)
+                            @case('publish')
+                                <span class="badge bg-success">Active</span>
+                            @break
+                            @case('passive')
+                                <span class="badge bg-danger">Passive</span>
+                            @break
+                            @case('draft')
+                                <span class="badge bg-warning">Draft</span>
+                            @break
+                        @endswitch
+                    </td>
+                    <td>
+                       <span title="Expires on {{$quiz->finished_at}}">{{$quiz->finished_at ? $quiz->finished_at->diffForHumans() : 'Not assigned'}}</span>
+                    </td>
+                    <td>
                     <a href="{{route('quizzes.edit',$quiz->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
                     <a href="{{route('quizzes.destroy',$quiz->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                     </td>

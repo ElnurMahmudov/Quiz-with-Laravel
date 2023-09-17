@@ -5,8 +5,11 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap/min.css')}}">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">
+            <h5 class="card-title float-end">
                 <a href="{{route('questions.create',$quiz->id)}}" class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> New Question</a><br><br>
+            </h5>
+            <h5 class="card-title">
+                <a href="{{route('quizzes.index')}}" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-arrow-left"></i> Back</a><br><br>
             </h5>
             <table class="table table-bordered">
                 <thead>
@@ -39,7 +42,7 @@
                     <td>{{$question->correct_answer}}</td>
                     <td>
                     <a href="{{route('questions.edit',[$quiz->id,$question->id])}}" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
-                    <a href="{{route('quizzes.destroy',$question->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                    <a href="{{route('question.destroy',[$quiz->id,$question->id])}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                     </td>
                     </tr>
                 @endforeach
