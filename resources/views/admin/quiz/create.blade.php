@@ -5,6 +5,9 @@
  
     <div class="card">
         <div class="card-body">
+            <h5 class="card-title">
+                <a href="{{route('quizzes.index')}}" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-arrow-left"></i> Back</a><br><br>
+            </h5>
             <form method="POST" action="{{route('quizzes.store')}}">
                 @csrf
                 <div class="form-group">
