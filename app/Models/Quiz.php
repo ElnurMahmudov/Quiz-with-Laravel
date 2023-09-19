@@ -12,7 +12,7 @@ class Quiz extends Model
     use HasFactory;
     use Sluggable;
 
-    protected $fillable=['title','description','slug','finished_at'];
+    protected $fillable=['title','description','status','slug','finished_at'];
 
     protected $dates=['finished_at'];
 

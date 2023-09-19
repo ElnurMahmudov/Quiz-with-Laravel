@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-8">
                         {{$quiz->description}}</p>
-                        <a href="" class="btn btn-primary btn-sm">Start quiz</a>
+                        <a href="{{route('quiz.join',$quiz->slug)}}" class="btn btn-primary btn-sm">Start quiz</a>
                     </div>
                 </div>
         </div>
