@@ -5,7 +5,8 @@
         <div class="card">
             <div class="card-body">
                 <p class="card-text">
-                    <form method="POST" action="">
+                    <form method="POST" action="{{route('quiz.result',$quiz->slug)}}">
+                        @csrf
                     @foreach($quiz->questions as $question)
                         <strong>{{$loop->iteration}}) {{$question->question}}</strong>
                         @if($question->image)

@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'current_team_id' => null,
         ]);
 
-        \App\Models\User::factory(5)->create();
+        \App\Models\User::factory(10)->create();
 
     }
 }
