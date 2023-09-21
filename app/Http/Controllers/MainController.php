@@ -21,13 +21,17 @@ class MainController extends Controller
     }
 
     public function quiz_detail($slug){
-        $quiz = Quiz::whereSlug($slug)->withCount('questions')->first() ?? abort();
+        $quiz = Quiz::whereSlug($slug)->with('my_result','results')->withCount('questions')->first() ?? abort();
         return view('quiz_detail',compact('quiz'));
     }
 
     public function result(Request $request, $slug){
         $quiz = Quiz::whereSlug($slug)->withCount('questions')->first() ?? abort();
         $correct = 0;
+
+        if($quiz->my_result){
+            return redirect()->route('quiz.detail',$quiz->slug)->withSuccess('You have already asked for this quiz');
+        }
 
         foreach($quiz->questions as $question){
             Answer::create([
