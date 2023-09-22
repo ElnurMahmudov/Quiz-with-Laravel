@@ -18,7 +18,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Point
+                                Your point
                                 <span class="badge bg-primary bg-pill">{{$quiz->my_result->point}}</span>
                             </li>
                             @endif
@@ -42,7 +42,23 @@
                                 <span class="badge bg-secondary bg-pill">{{$quiz->details['average']}}</span>
                             </li>
                             @endif
-                        </ul>
+                       
+                        @if(count($quiz->topTen)>0)
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Top 10</h5>
+                                @foreach($quiz->topTen as $result)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{$loop->iteration}})
+                                    <img src="{{$result->user->profile_photo_url}}" class="w-8 h-8 rounded-full">
+                                    {{$result->user->name}}
+                                    <span class="badge bg-success bg-pill">{{$result->point}}</span>
+                                </li>
+                                @endforeach
+                            </div>
+                        </div>
+                        @endif
+                    </ul>
                     </div>
                     <div class="col-md-8">
                         {{$quiz->description}}</p>
