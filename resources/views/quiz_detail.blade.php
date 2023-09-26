@@ -9,6 +9,12 @@
                 <div class="row">
                     <div class="col-md-4">
                         <ul>
+                            @if($quiz->my_rank)
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                My place on the list
+                                <span class="badge bg-primary bg-pill">{{$quiz->my_rank}}</span>
+                            </li>
+                            @endif
                             @if($quiz->my_result)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Answers
@@ -18,7 +24,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Your point
+                                My point
                                 <span class="badge bg-primary bg-pill">{{$quiz->my_result->point}}</span>
                             </li>
                             @endif
@@ -51,7 +57,7 @@
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     {{$loop->iteration}})
                                     <img src="{{$result->user->profile_photo_url}}" class="w-8 h-8 rounded-full">
-                                    {{$result->user->name}}
+                                    <span @if(auth()->user()->id==$result->user_id) style="background-color:#DAA520	; color:white; border-radius: 5px; border: 1px solid #73AD21;" @endif>- {{$result->user->name}} -</span>
                                     <span class="badge bg-success bg-pill">{{$result->point}}</span>
                                 </li>
                                 @endforeach
