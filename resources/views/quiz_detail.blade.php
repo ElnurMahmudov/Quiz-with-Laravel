@@ -70,7 +70,9 @@
                         {{$quiz->description}}</p>
                         @if($quiz->my_result)
                             <a href="{{route('quiz.join',$quiz->slug)}}" class="btn btn-success btn-sm">view quiz</a>
-                        @else
+                        @elseif($quiz->finished_at>now())
+                            <a href="{{route('quiz.join',$quiz->slug)}}" class="btn btn-primary btn-sm">Start quiz</a>
+                        @elseif($quiz->finished_at==null)
                             <a href="{{route('quiz.join',$quiz->slug)}}" class="btn btn-primary btn-sm">Start quiz</a>
                         @endif
                     </div>
