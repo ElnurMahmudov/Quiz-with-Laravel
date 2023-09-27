@@ -6,6 +6,11 @@
             <div class="card-body">
                 <p class="card-text">
                     @foreach($quiz->questions as $question)
+                    <div class="alert alert-info float-end">
+                        <small>
+                            This question was answered correctly by <strong>{{$question->true_percent}}%</strong> of participants.
+                        </small>
+                    </div>
                         <strong>
                         @if($question->correct_answer == $question->my_answer->answer)
                             <i class="fa fa-check text-success"></i>
